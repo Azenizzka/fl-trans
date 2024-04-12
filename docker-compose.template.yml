@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  fl-trans-db:
+    container_name: fl-trans-db-container
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=db_fl_trans
+    image: postgres
