@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   fl-trans-db:
     container_name: fl-trans-db-container
