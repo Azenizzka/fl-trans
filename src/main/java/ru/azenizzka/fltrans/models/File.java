@@ -3,15 +3,12 @@ package ru.azenizzka.fltrans.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode
+@Getter
+@Setter
 
 @Entity
 @Table
@@ -22,9 +19,29 @@ public class File {
 
 	private String name;
 
-	private LocalDateTime createdTime;
+	private String contentType;
 
+	private final LocalDateTime createdTime;
+
+	@Setter(AccessLevel.PRIVATE)
 	private LocalDateTime lastModifiedTime;
 
+	@Lob
 	private byte[] data;
+
+	public void setName(String name) {
+		this.name = name;
+		lastModifiedTime = LocalDateTime.now();
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+		lastModifiedTime = LocalDateTime.now();
+	}
+
+
+	public File() {
+		this.createdTime = LocalDateTime.now();
+		this.lastModifiedTime = LocalDateTime.now();
+	}
 }

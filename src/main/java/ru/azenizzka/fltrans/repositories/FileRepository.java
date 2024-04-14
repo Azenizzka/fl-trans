@@ -6,5 +6,5 @@ import ru.azenizzka.fltrans.models.File;
 
 @Repository
 public interface FileRepository extends JpaRepository<File, Long> {
-
+	boolean existsById(Long id);
 }
