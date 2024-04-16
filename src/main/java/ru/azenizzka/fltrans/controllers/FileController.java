@@ -3,7 +3,6 @@ package ru.azenizzka.fltrans.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +26,7 @@ public class FileController {
 	private final FileService fileService;
 
 	@GetMapping()
+	@CrossOrigin
 	public ResponseEntity<List<FileDTO>> getAll() {
 		List<FileDTO> fileDTOS = fileService.findAll().stream()
 				.map(file -> {
@@ -60,7 +60,7 @@ public class FileController {
 		File file = new File();
 		file.setName(multipartFile.getOriginalFilename());
 		file.setData(multipartFile.getBytes());
-		System.out.println("content type: " + multipartFile.getContentType());
+		file.setContentType(multipartFile.getContentType());
 
 		Map<String, Long> response = new HashMap<>();
 		response.put("id", fileService.save(file).getId());
